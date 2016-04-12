@@ -2,6 +2,7 @@
 ## author: David Ruvolo
 ## date modified: 2016-01-11 
 ## summary: collection of commonly used functions
+## Location: "~/Github/Rutils/mainFUNC.R"
 #===============================================================================
 #---------------------------- X TABLE CUSTOM FUNCTION -------------------------#
 # Two main commands: make_xtable() & make_html_table()
