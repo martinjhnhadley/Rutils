@@ -477,11 +477,19 @@ stopwatch <- function(){
     }
     
     # define time units
-    hour = 00
-    minute = 00
-    second = 00
+    hour = 0
+    minute = 0
+    second = 0
     
-    print(paste0("Timer elapsed: ",hour,":",minute,":",second))
+    cat("Welcome to StopwatchR!\n\n",
+        "\tTime elapsed: ",
+        ifelse(hour < 10, paste0(0,hour), hour),
+        ":",
+        ifelse(minute < 10, paste0(0,minute),minute),
+        ":",
+        ifelse(second < 10, paste0(0, second), second),
+        "\n\nPress ESC to stop."
+    )
     
     while(value == 1){
         
@@ -493,7 +501,7 @@ stopwatch <- function(){
             
             minute = minute + 1
             
-            second = 00
+            second = 0
             
         } else if(minute == 60){
             
@@ -504,7 +512,15 @@ stopwatch <- function(){
             second = 00
         }
         
-        print(paste0("Timer elapsed: ",hour,":",minute,":",second))
+        cat("Welcome to StopwatchR!\n\n",
+                    "\tTime elapsed: ",
+                     ifelse(hour < 10, paste0(0,hour), hour),
+                     ":",
+                     ifelse(minute < 10, paste0(0,minute),minute),
+                     ":",
+                     ifelse(second < 10, paste0(0, second), second),
+                     "\n\nPress ESC to stop."
+        )
         
         Sys.sleep(1)
     }
