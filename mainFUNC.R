@@ -400,6 +400,7 @@ clear.environment <- function(){
     ll <- subset(ll, ll != "dates.add.months")
     ll <- subset(ll, ll != "dates.print.MonthsYears")
     ll <- subset(ll, ll != "DAYS")
+    ll <- subset(ll, ll != "get.filesize")
     ll <- subset(ll, ll != "getstr")
     ll <- subset(ll, ll != "knot.ggplots")
     ll <- subset(ll, ll != "make_html_table")
@@ -425,6 +426,53 @@ show.functions <- function(type='closure'){
     typelist<-sapply(sapply(inlist,get),typeof)
     
     return(names(typelist[typelist==type]))
+}
+#===============================================================================
+# FUNCTION: Get file/directory size in MBs - default is dir()
+#===============================================================================
+get.filesize <- function(x = dir(), sort = "name"){
+    # load package
+    require(tools, quietly = T)
+    # get file name, type, size
+    for (i in 1:length(x)){
+        if(i == 1){
+            name <- as.character(x[i])
+            type <- file_ext(x[i])
+            size <- as.numeric(round(file.size(x[i]) / 1048576, 2))
+        }
+        else{
+        name <- rbind(name, x[i])
+        type <- rbind(type, file_ext(x[i]))
+        size <- rbind(size, as.numeric(round(file.size(x[i])/1048576, 2)))
+        }
+    }
+    
+    # make df
+    df <- cbind(name, type, size)
+    df <- data.frame(df, stringsAsFactors = F, row.names = 1:length(x))
+    colnames(df) <- c("Name","Type", "Size")
+    df$Size <- as.numeric(df$Size)
+    
+    # load message
+    cat(paste0("\nHere's what I found: \n",
+               "\tFile(s): ",length(df$Name), "\t", "Total Size (MB): ", sum(df$Size),
+               "\n\n", 
+               "Overview:\n\n"))
+    
+    # recode
+    df$Type[df$Type==""] <- "NA"
+    df$Size[df$Size == 0] <- "< 0.5 MB"
+    
+    # sorting & print
+    if(sort == "name"){
+        df[order(df$Name),]
+    }
+    else if(sort == "type"){
+        df[order(df$Type),]
+    }
+    else if(sort == "size"){
+        df[order(df$Size),]
+    }
 }
 #===============================================================================
 # get string functions
