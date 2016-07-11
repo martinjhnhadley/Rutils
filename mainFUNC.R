@@ -380,6 +380,79 @@ knot.ggplots<-function(gg1,gg2, cols = 1, rows = 2){
     
 }
 #===============================================================================
+# multiple plots 
+#===============================================================================
+# from: https://github.com/ateucher/useful_code/blob/master/R/multiplot.r
+multi.ggplot <- function(..., plotlist=NULL, cols=1, layout=NULL, widths=NULL, heights=NULL, 
+                      title=NULL, titlefont = "", titleface = 1, titlesize = 16) {
+    
+    # Make a list from the ... arguments and plotlist
+    plots <- c(list(...), plotlist)
+    
+    numPlots = length(plots)
+    
+    # If layout is NULL, then use 'cols' to determine layout
+    if (is.null(layout)) {
+        # Make the panel
+        # ncol: Number of columns of plots
+        # nrow: Number of rows needed, calculated from # of cols
+        layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                         ncol = cols, nrow = ceiling(numPlots/cols))
+    }
+    
+    if (!is.null(title)) { # Add a narrow row at the top for the title
+        layout <- rbind(rep(0,ncol(layout)),layout)
+        if (is.null(heights)) {
+            plotrows <- nrow(layout)-1
+            rowheights <- c(0.1, rep(1,plotrows)/plotrows)
+        } else {
+            rowheights <- c(0.1, heights/sum(heights))
+        }
+    } else {
+        if (is.null(heights)) {
+            rowheights <- rep(1,nrow(layout))  
+        } else {
+            rowheights <- heights
+        }
+    }
+    
+    if (is.null(widths)) {
+        colwidths <- rep(1, cols)
+    } else {
+        colwidths <- widths
+    }
+    
+    if (numPlots==1) {
+        
+        return(plots[[1]] + labs(title=title))
+        
+    } else {
+        # Set up the page
+        grid.newpage()
+        pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout), 
+                                                   widths=colwidths, 
+                                                   heights=rowheights)))
+        
+        # Make each plot, in the correct location
+        for (i in 1:numPlots) {
+            # Get the i,j matrix positions of the regions that contain this subplot
+            matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+            
+            print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                            layout.pos.col = matchidx$col))
+        }
+        
+        if (!is.null(title)) {
+            grid.text(title, vp = viewport(layout.pos.row = 1
+                                           , layout.pos.col = 1:ncol(layout)), 
+                      gp = gpar(fontfamily = titlefont, fontface = titleface, 
+                                fontsize = titlesize))
+        }
+        
+    }
+    return(invisible(NULL))
+}
+#===============================================================================
 # clear console screen    
 #===============================================================================
 clear.console <- function(){
@@ -403,6 +476,7 @@ clear.environment <- function(){
     ll <- subset(ll, ll != "get.filesize")
     ll <- subset(ll, ll != "getstr")
     ll <- subset(ll, ll != "knot.ggplots")
+    ll <- subset(ll, ll != "multi.ggplot")
     ll <- subset(ll, ll != "make_html_table")
     ll <- subset(ll, ll != "make_xtable")
     ll <- subset(ll, ll != "month.converter")
