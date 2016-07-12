@@ -2,6 +2,13 @@
 #===============================================================================
 # stopwatch: H:M:S
 #===============================================================================
+
+clear.console <- function(){
+    
+    cat("\014") # command to clear screen wrapped in a function
+    
+}
+
 stopwatch <- function(){
     
     if(exists("value")==FALSE){

@@ -1,11 +1,71 @@
 # Converts UK scale into US with warning signals & vice versa
 lipid.panel<-function(Date,TotalCholesterol,Triglyceride,HDL,scale,gender){
-     
+    
+    # sources: American Heart Association and (? UK ORG)
+    # 1. Total Cholesterol Flag
+    cholesterol.flag<-function(x){
+        # Total Cholesterol Ranges - 3 conditions
+        if(x < 200){
+            range<-"Desirable"
+        } else if(x >= 200 && x <=239){
+            range<-"Borderline High"
+        } else if (x >= 240){
+            range<-"High"
+        }
+    }
+    # 2. Triglyceride Flag
+    triglyceride.flag<-function(x){
+        # Triglyceride Level Flags: 4 conditions
+        if (x < 150){
+            range<-"Desirable"
+        } else if(x >=150 && x <=199){
+            range<-"Borderline High"
+        } else if(x >=200 && x<=499){
+            range<-"High"
+        } else if(x >= 500){
+            range<-"Very High"
+        }
+    }
+    # 3. HDL Flag
+    hdl.flag<-function(x,gender){
+        # HDL Levels Flag: 5 conditions
+        if (x < 40 && gender =="Male"){
+            range<-"Poor"
+        } else if (x < 50 && gender =="Female"){
+            range<-"Poor"
+        } else if (x >= 40 && x <=59 && gender == "Male"){
+            range<-"Better"
+        } else if (x >=50 && x <=59 && gender =="Female"){
+            range<-"Better"
+        } else if (x >= 60){
+            range<-"Best"
+        }
+    }
+    # 4. LDL Flag
+    ldl.flag<-function(x){
+        # LDL Level Flag: 6 conditions
+        if (x <= 69){
+            range<-"Ideal very high risk of CvD"
+        } else if (x >=70 && x <= 99){
+            range<-"Ideal for high risk CvD"
+        } else if (x >= 100 && x <= 129){
+            range<-"Ideal range"
+        } else if (x >= 130 && x <=159){
+            range<-"Boderline High"
+        } else if (x >= 160 && x <=189){
+            range<-"High"
+        } else if (x >=190){
+            range<-"Very High"
+        }
+    }  
+    
+    
       # Conversion Constants
       lipid.constant<-38.66976      
       triglyceride.constant<-88.4956
       
       if(scale =="UK"){
+          
             # For UK -> US conversion (multiply by constants)
             cholesterol<-TotalCholesterol*lipid.constant
             triglyceride<-Triglyceride*triglyceride.constant
@@ -23,7 +83,9 @@ lipid.panel<-function(Date,TotalCholesterol,Triglyceride,HDL,scale,gender){
             hdl.range<-hdl.flag(hdl,gender)
             ldl.range<-ldl.flag(us.ldl)
             Range<-c(tot.range,hdl.range,ldl.range,tri.range)
+            
       } else if(scale =="US"){
+          
             # For US -> UK conversion (divide by constants)
             cholesterol<-TotalCholesterol/lipid.constant
             triglyceride<-Triglyceride/triglyceride.constant
@@ -45,64 +107,8 @@ lipid.panel<-function(Date,TotalCholesterol,Triglyceride,HDL,scale,gender){
       # Create & Return output data table
       Measurements<-as.character(c("TotalCholesterol","HDL","LDL","Triglyceride"))
       df<-data.frame(Date,Measurements,UK,US,Range,row.names = NULL)
-      df
+      return(df)
 }
-# 1. Total Cholesterol Flag
-cholesterol.flag<-function(x){
-      # Total Cholesterol Ranges - 3 conditions
-      if(x < 200){
-            range<-"Desirable"
-      } else if(x >= 200 && x <=239){
-            range<-"Borderline High"
-      } else if (x >= 240){
-            range<-"High"
-      }
-}
-# 2. Triglyceride Flag
-triglyceride.flag<-function(x){
-      # Triglyceride Level Flags: 4 conditions
-      if (x < 150){
-            range<-"Desirable"
-      } else if(x >=150 && x <=199){
-            range<-"Borderline High"
-      } else if(x >=200 && x<=499){
-            range<-"High"
-      } else if(x >= 500){
-            range<-"Very High"
-      }
-}
-# 3. HDL Flag
-hdl.flag<-function(x,gender){
-      # HDL Levels Flag: 5 conditions
-      if (x < 40 && gender =="Male"){
-            range<-"Poor"
-      } else if (x < 50 && gender =="Female"){
-            range<-"Poor"
-      } else if (x >= 40 && x <=59 && gender == "Male"){
-            range<-"Better"
-      } else if (x >=50 && x <=59 && gender =="Female"){
-            range<-"Better"
-      } else if (x >= 60){
-            range<-"Best"
-      }
-}
-# 4. LDL Flag
-ldl.flag<-function(x){
-      # LDL Level Flag: 6 conditions
-      if (x <= 69){
-            range<-"Ideal very high risk of CvD"
-      } else if (x >=70 && x <= 99){
-            range<-"Ideal for high risk CvD"
-      } else if (x >= 100 && x <= 129){
-            range<-"Ideal range"
-      } else if (x >= 130 && x <=159){
-            range<-"Boderline High"
-      } else if (x >= 160 && x <=189){
-            range<-"High"
-      } else if (x >=190){
-            range<-"Very High"
-      }
-} 
 # Plotting Lipid panels by lab date
 lipid.plot<-function(data){
       # Load Packages
@@ -143,6 +149,6 @@ lipid.plot<-function(data){
             theme(axis.text.y = element_text(colour="black",size=12))
 }     
 
-labsummaries<-read.csv("parameters.csv")
-x<-lipid.plot(labsummaries)
-x
+#labsummaries<-read.csv("parameters.csv")
+#x<-lipid.plot(labsummaries)
+#x

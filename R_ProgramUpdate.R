@@ -9,8 +9,8 @@
 # installing/loading the package:
 
 # 1
-if(!require(installr)) { install.packages("installr"); require(installr)} #load / install+load installr
+# if(!require(installr)) { install.packages("installr"); require(installr)} #load / install+load installr
 # 2
-updateR(F, T, T, F, T, F, T) # install, move, update.package, quit R. # Follow the on screen instructions and you may have to hit next, okay, etc.
+# updateR(F, T, T, F, T, F, T) # install, move, update.package, quit R. # Follow the on screen instructions and you may have to hit next, okay, etc.
 
 # Program will exit once updates are installed and packages are moved back to the library().  
