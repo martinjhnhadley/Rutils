@@ -1,6 +1,6 @@
 # Rutils
 
-Collection of R functions that I've use.
+Collection of R functions that I use.
 
 ### Primary funtions
 
