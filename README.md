@@ -22,7 +22,7 @@ Collection of R functions that I've use.
 <ol>
     <li><b> make_it_shiny:</b> function for creating a shiny directory and initial files</li><br>
     <li><b> shiny_functions:</b> useful shiny functions for data entry based apps (save, load, timestamp)</li><br> 
-</ol
+</ol>
 
 ### Tables and Figures
 
@@ -55,6 +55,9 @@ Collection of R functions that I've use.
 </ol>
 
 ## Use
+
+To use these functions, load them into your R environment by using the load_utils.R file, and then
+load all of the functions using the <code>load.utils()</code> function.
 
 <ol>
     <li><code>source("~/.../load_utils.R")</code></li>
