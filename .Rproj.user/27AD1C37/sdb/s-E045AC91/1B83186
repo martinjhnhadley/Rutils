@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "## load functions\n# ====================\n# loadR\n# ====================\nload.utils <- function(directory = \"~/Github/Rutils/\", sort = \"name\"){\n    \n    # load package\n    require(tools, quietly = T)\n    \n    # create file list\n    filelist <- dir(directory)\n    \n    # message 1\n    cat(paste0(\"I found: \", length(filelist), \" packages. Loading...\\n\"))\n    Sys.sleep(1)\n        \n    # load files\n    for(i in 1:length(filelist)){\n        if(file_ext(filelist[i]) == \"R\"){\n            source(paste0(directory, filelist[i]))\n        }\n    }\n    \n    # message\n    cat(\"Your functions located in '~/Github/Rutils/' were loaded successfully!\")\n}",
+    "created" : 1468505928861.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1327997482",
+    "id" : "1B83186",
+    "lastKnownWriteTime" : 1468332628,
+    "last_content_update" : 1468332628,
+    "path" : "~/Github/Rutils/load_utils.R",
+    "project_path" : "load_utils.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

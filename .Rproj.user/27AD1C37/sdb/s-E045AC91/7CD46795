@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# Rutils\n\nCollection of R functions that I've use.\n\n### Primary funtions\n\n<ol>\n    <li><b>load_utils:</b> The primary function for loading all functions. Sets to default directory (github/Rutils)</li><br>\n    <li><b> clearR.R:</b> clear series - includes clear.console (wipes the console down) and clear.environment (removes all non-functions)</li><br>\n</ol>\n\n### Data Transformation\n\n<ol>\n    <li><b> date_series:</b> useful functions relating to dates (i.e., data conversion, adding dates, difference between dates, etc.)</li><br>\n    <li><b> getR:</b> get series (includes get loaded functions, get file list/size of a directory, get a string from an object)</li><br>\n    <li><b> toTable:</b> series of functions that send summary stats to csv file (handy with psych package)</li><br>\n</ol>\n\n### Shiny\n\n<ol>\n    <li><b> make_it_shiny:</b> function for creating a shiny directory and initial files</li><br>\n    <li><b> shiny_functions:</b> useful shiny functions for data entry based apps (save, load, timestamp)</li><br> \n</ol\n\n### Tables and Figures\n\n<ol>\n    <li><b> ggplot_tools:</b> function for combining multiple ggplot objects and custom themes!</li><br>\n    <li><b> make_HTMLtable:</b> auto generates an HTML friendly table with alt row/col colors, other features included</li><br>\n    <li><b> make_xtable:</b> auto generates a latex friendly table</li><br>\n</ol>\n\n### Useful Converters\n\n<ol>\n    <li><b> conversion_script.R:</b> useful conversion functions</li><br>\n    <li><b> lipid_conversion:</b> handy function for converting lipid panel from US to UK by gender. Includes flags!!</li><br>\n</ol>\n\n\n### Misc.\n\n<ol>\n    <li><b> stopwatch:</b> fun stopwatch function.</li> <br>\n</ol>\n\n### OLD\n\n<ol>\n    <li><b> mainFunc:</b> *OLD: main script that includes everything - outdated </li><br>\n    <li><b> R_ProgramUpdate:</b> <i>deactivated</i></li><br>\n\n</ol>\n\n## Use\n\n<ol>\n    <li><code>source(\"~/.../load_utils.R\")</code></li>\n    <li><code>load.utils()</code></li>\n</ol>\n\n*<i>Note</i>: You will need to adjust the default directory accordingly.\n\n\n",
+    "created" : 1468504857184.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3722165072",
+    "id" : "7CD46795",
+    "lastKnownWriteTime" : 1468506266,
+    "last_content_update" : 1468506266053,
+    "path" : "~/Github/Rutils/README.md",
+    "project_path" : "README.md",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "markdown"
+}

@@ -26,6 +26,7 @@ clear.environment <- function(){
     ll <- subset(ll, ll != "get.functions")
     ll <- subset(ll, ll != "knot.ggplots")
     ll <- subset(ll, ll != "multi.ggplot")
+    ll <- subset(ll, ll != "make_it_shiny")
     ll <- subset(ll, ll != "make_html_table")
     ll <- subset(ll, ll != "make_xtable")
     ll <- subset(ll, ll != "month.converter")
