@@ -1,17 +1,3 @@
-<style>
-h1{
-    color: #31a354;
-}
-
-h2{
-    color: #636363;
-}
-
-h3{
-    color: #3182bd;
-}
-</style>
-
 # Rutils
 <i>A Collection of R functions</i>
 
