@@ -60,10 +60,29 @@ To use these functions, load them into your R environment by using the load_util
 load all of the functions using the <code>load.utils()</code> function.
 
 <ol>
-    <li><code>source("~/.../load_utils.R")</code></li>
+    <li><code>source("~/.../load_utils.R")</code>*</li>
     <li><code>load.utils()</code></li>
 </ol>
 
 *<i>Note</i>: You will need to adjust the default directory accordingly.
 
+## Notes
 
+<ul>
+    <li>The <code>make_it_shiny()</code> is my new favorite function. I use shiny a lot 
+    and creating directories and necessary files can be tiring. Previous routines via the 
+    terminal using the <code>mkdir</code> and <code>touch</code> commands helped speed up the initial
+    setup, but I wanted something that was faster. The latest commit (July 15, 2016) incorporated
+    a secondary function <code>make_my_text_shiny</code> uses the <code>write()</code> function
+    to input the starting text in each file. This includes:
+        <ul>
+            <li>Creating Text to load commonly used pacakges</li>
+            <li>Creating the framework for the ui and server</li>
+            <li>Linking the UI with external scripts (i.e., css, tracker, etc.)</li>
+        </ul>
+    <br>
+    Use the function in the following way...<br>
+    &nbsp;<code>make_my_text_shiny(file_path = "/path/to/file", file_type = "ui")</code><br>
+    File type takes the following inputs: ui, server, global. 
+    </li>
+</ul>

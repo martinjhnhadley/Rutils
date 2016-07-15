@@ -44,7 +44,7 @@ make_it_shiny <- function(directory_name = "myshinyapp", default_directory = "~/
     file.create(paste0(dir_path,"/","www","/", "style.css"), showWarnings = F)
     
     # end message
-    cat(paste0("New shiny project created! \nYou can find it here: ", dir_path))
+    cat(paste0("New shiny project created! \nYou can find it here: ", dir_path,"\n\n"))
     
 }
 
