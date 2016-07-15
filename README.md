@@ -1,6 +1,21 @@
-# Rutils
+<style>
+h1{
+    color: #31a354;
+}
 
-Collection of R functions that I use.
+h2{
+    color: #636363;
+}
+
+h3{
+    color: #3182bd;
+}
+</style>
+
+# Rutils
+<i>A Collection of R functions</i>
+
+## Functions
 
 ### Primary funtions
 
@@ -74,15 +89,15 @@ load all of the functions using the <code>load.utils()</code> function.
     terminal using the <code>mkdir</code> and <code>touch</code> commands helped speed up the initial
     setup, but I wanted something that was faster. The latest commit (July 15, 2016) incorporated
     a secondary function <code>make_my_text_shiny</code> uses the <code>write()</code> function
-    to input the starting text in each file. This includes:
+    to input the starting text in each file. This includes:<br>
         <ul>
             <li>Creating Text to load commonly used pacakges</li>
             <li>Creating the framework for the ui and server</li>
             <li>Linking the UI with external scripts (i.e., css, tracker, etc.)</li>
         </ul>
     <br>
-    Use the function in the following way...<br>
-    &nbsp;<code>make_my_text_shiny(file_path = "/path/to/file", file_type = "ui")</code><br>
-    File type takes the following inputs: ui, server, global. 
+    Use the function in the following way...<br><br>
+    &nbsp;&nbsp;<code>make_my_text_shiny(file_path = "/path/to/file", file_type = "ui")</code><br><br>
+    <i>file_type</i> takes the following inputs: ui, server, global. 
     </li>
 </ul>
