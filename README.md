@@ -84,6 +84,12 @@ load all of the functions using the <code>load.utils()</code> function.
     <br>
     Use the function in the following way...<br><br>
     &nbsp;&nbsp;<code>make_my_text_shiny(file_path = "/path/to/file", file_type = "ui")</code><br><br>
-    <i>file_type</i> takes the following inputs: ui, server, global. 
+    <i>file_type</i> takes the following inputs: ui, server, global.
     </li>
+    <li>Function <code>get.dirInfo()</code> gets a list of all of the files in your working directory
+    and presents summary information as a table. This includes file type, size, dates (created and modified), and
+    flag for if the item is a directory. This only works when you want to get information on your current working directory.
+    Ideally it should work for using specific paths (i.e., <code>.../.../this directory</code>, but it does not. Set the directory first, 
+    and then execute. Any feedback on this would be appreciated.</li>
+    
 </ul>
