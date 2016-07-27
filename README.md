@@ -108,7 +108,7 @@ Where....
 <ul>
 
 
-#### Useful Converters
+## Useful Converters
 
 <ol>
     <li><i> conversion_script.R:</i> useful conversion functions</li><br>
@@ -116,13 +116,13 @@ Where....
 </ol>
 
 
-#### Misc.
+## Misc.
 
 <ol>
     <li><i> stopwatch:</i> fun stopwatch function.</li> <br>
 </ol>
 
-#### OLD
+## OLD
 
 <ol>
     <li><i> mainFunc:</i> *OLD: main script that includes everything - outdated </li><br>
