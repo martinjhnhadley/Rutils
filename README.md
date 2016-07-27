@@ -169,11 +169,6 @@ load all of the functions using the <code>load.utils()</code> function.
     
 </ul>
 
-<<<<<<< HEAD
-
 Any feedback and comments are greatly appreciated. 
 
 Visit <a href="www.davidcruvolo.com" target="_blank">www.davidcruvolo.com</a> for my contact details.<br><br>
-=======
-Last Updated: 26 July 2016
->>>>>>> origin/master
