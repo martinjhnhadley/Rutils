@@ -211,16 +211,18 @@ $(document).ready(function () {
     
         # set alignment
         my_alignment &lt;- c(&quot;c&quot;,&quot;r&quot;,&quot;l&quot;) # alignment must have +1 entry to offset for rownames(?)
-        
-        make_xtable(df, title =&quot;My table&quot;,alignment = my_alignment)
+        make_xtable(df, alignment = my_alignment)
         
         # if you wanted to apply left alignment for all cols you would do something like this
+        
         alignment &lt;- rep(&quot;l&quot;,ncol(mydata)+1) 
+        make_xtable(df, alignment = my_alignment)
         
         # OR
         
         alignment &lt;- rep(&quot;r&quot;,ncol(mydata)+1) # for all cols right alignment
-            
+        make_xtable(df, alignment = my_alignment)
+        
         </code></pre>
     </li>
 <br>
@@ -264,6 +266,59 @@ $(document).ready(function () {
 <br><br>
 </ul>
 
+
+<ol start="2" style="list-style-type: decimal">
+<li><b>make_html_table()</b></li>
+</ol>
+<p>The <code>make_html_table()</code> takes the following inputs:</p>
+<p><code>make_html_table(mydata,title = NULL,alignment=NULL,altRowColor = FALSE,altColColor = FALSE,rnames = FALSE)</code></p>
+Where…
+<ul>
+    <li>
+<code>mydata</code> = the dataset you wish to use for generating a table. Currently, the function does not handle inline subsets i.e. <code>make_html_table(df[,1])</code>.
+</li>
+<br>
+<li>
+<code>title</code> = the title you would like to place over the table. The default title position is above the table.
+</li>
+<br>
+<li>
+<code>alignment</code> = horizontal position of table contents. Default is ‘center’. To add custom alignment you would need to something like this:<br><br>
+<pre><code>
+        # build df
+        df &lt;- data.frame(&quot;col1&quot; = c(&quot;a&quot;,&quot;b&quot;),&quot;col2&quot; = c(1,2))
+    
+        # set alignment
+        
+        alignment = rep(&quot;c&quot;,ncol(mydata))
+        make_html_table(df,alignment = alignment)
+        
+        # if you wanted to apply left alignment for all cols you would do something like this
+        
+        alignment &lt;- rep(&quot;l&quot;,ncol(mydata)) 
+        make_html_table(df,alignment = alignment)
+        
+        # OR
+        
+        alignment &lt;- rep(&quot;r&quot;,ncol(mydata)+1) # for all cols right alignment
+        make_html_table(df,alignment = alignment)
+            
+        </code></pre>
+    </li>
+<br>
+<li>
+<code>altColColor</code> = Specify colors for color for alternative columns. Default is gray95.
+</li>
+<br>
+<li>
+<code>altRowColor</code> = Specify colors for color for alternative rowss. Default is gray95.
+</li>
+<br>
+<li>
+<code>rnames</code> = Display row names. Default is FALSE
+</li>
+<br><br>
+</ul>
 
 </div>
 </div>
