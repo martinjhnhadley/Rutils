@@ -7,7 +7,7 @@
 #---------------------------- X TABLE CUSTOM FUNCTION -------------------------#
 #===============================================================================
 make_xtable <- function(mydata, title = NULL, alignment = NULL,
-                        rotate = NULL, color = NULL, cnames = TRUE, rnames = FALSE){
+                        rotate = FALSE, color = NULL, cnames = TRUE, rnames = FALSE){
     
     # ====================== 
     # check library() for xtables if not, install, otherwise load xtables
@@ -102,7 +102,7 @@ make_xtable <- function(mydata, title = NULL, alignment = NULL,
             # -----------------------------------------------
             # if/then statement for rotating the table or not
             
-            if (is.null(rotate)){
+            if (rotate == FALSE){
                 
                 # print non-rotated table
                 

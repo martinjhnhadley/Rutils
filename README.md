@@ -1,16 +1,16 @@
 # Rutils
-<i>A Collection of R functions</i>
+<i>A Collection of R functions that I frequently use.</i>
 
 ## Functions
 
-### Primary funtions
+#### Primary funtions
 
 <ol>
     <li><i>load_utils:</i> The primary function for loading all functions. Sets to default directory (github/Rutils)</li><br>
     <li><i> clearR.R:</i> clear series - includes clear.console (wipes the console down) and clear.environment (removes all non-functions)</li><br>
 </ol>
 
-### Data Transformation
+#### Data Transformation
 
 <ol>
     <li><i> date_series:</i> useful functions relating to dates (i.e., data conversion, adding dates, difference between dates, etc.)</li><br>
@@ -18,14 +18,19 @@
     <li><i> toTable:</i> series of functions that send summary stats to csv file (handy with psych package)</li><br>
 </ol>
 
-### Shiny
+#### Shiny
 
 <ol>
     <li><i> make_it_shiny:</i> function for creating a shiny directory and initial files</li><br>
     <li><i> shiny_functions:</i> useful shiny functions for data entry based apps (save, load, timestamp)</li><br> 
 </ol>
 
-### Tables and Figures
+#### Tables and Figures
+
+Some of the functions in the ggplot_tools.R file are from online forums, wheras
+the <i>make</i> functions were written to automate table making. 
+The <code>make_xtable()</code> is one of my favorites as it creates a \LaTeX 
+friendly table for inclusion into pdf documents. I will explain the usage of the make_..table() series below.
 
 <ol>
     <li><i> ggplot_tools:</i> function for combining multiple ggplot objects and custom themes!</li><br>
@@ -33,7 +38,77 @@
     <li><i> make_xtable:</i> auto generates a latex friendly table</li><br>
 </ol>
 
-### Useful Converters
+<i>How to use the make table functions</i>
+
+1) <b>make_xtable()</b>
+
+The <code>make_xtable()</code> takes the following parameters:
+
+<code>make_xtable(mydata, title = NULL, alignment = NULL, rotate = NULL, color = NULL, cnames = TRUE, rnames = FALSE)</code>
+
+Where....
+
+<ul>
+    <li><code>mydata</code> = the dataset you want to make a table for. Currently
+        the function does not handle inline subsets i.e. <code>mydata[c(1:5),]</code>, 
+        future builds will likely address this issue.
+    </li><br>
+    <li><code>title</code> = the title you would like to place over the table. The 
+        default title position is above the table.
+    </li><br>
+    <li><code>alignment</code> = horizontal position of table contents. Default is 'center'.
+        To add custom alignment you would need to something like this:<br><br>
+        <pre><code>
+        # build df
+        df <- data.frame("col1" = c("a","b"),"col2" = c(1,2))
+    
+        # set alignment
+        my_alignment <- c("c","r","l") # alignment must have +1 entry to offset for rownames(?)
+        
+        make_xtable(df, title ="My table",alignment = my_alignment)
+        
+        # if you wanted to apply left alignment for all cols you would do something like this
+        alignment <- rep("l",ncol(mydata)+1) 
+        
+        # OR
+        
+        alignment <- rep("r",ncol(mydata)+1) # for all cols right alignment
+            
+        </code></pre>
+    </li><br>
+    <li><code>rotate</code> = Print table as portrait or landscape. Default is FALSE.</li><br>
+    <li><code>color</code> = Specify colors for color for alternative rows. Default is gray95. 
+        This one is a little tricky as your custom color must be defined in the YAML/preamble.
+        You can do this by adding the color like this:<br><br>
+        <pre><code>
+        # example YAML in Rmarkdown
+        
+        ---
+        output: 
+            pdf_document:
+                latex_engine: xelatex
+        header-includes:
+        # load packages
+        - \usepackage{colortbl,xcolor, color}           # call packages
+        - \definecolor{Darkgreen}{rgb}{0,0.4,0}         # for Dark green using rgb
+        - \definecolor{LightBlue}{RGB}{222,235,247}     # for LightBlue using RGB
+        - \definecolor{Orange}{HTML}{DE2D26}            # for Red using HEX
+        ---
+        
+        # add block here for loading data, etc.
+        ```
+        my_data <- data.frame("x" = c("A","B","C"), "y" = c(1:3))
+        make_xtable(my_data, color = "LightBlue")
+        ```
+        
+        </code></pre>
+    </li><br>
+    <li><code>cnames</code> = Display column names. Default is TRUE</li><br><br>
+    <li><code>rnames</code> = Display row names. Default is FALSE</li><br><br>
+<ul>
+
+
+#### Useful Converters
 
 <ol>
     <li><i> conversion_script.R:</i> useful conversion functions</li><br>
@@ -41,13 +116,13 @@
 </ol>
 
 
-### Misc.
+#### Misc.
 
 <ol>
     <li><i> stopwatch:</i> fun stopwatch function.</li> <br>
 </ol>
 
-### OLD
+#### OLD
 
 <ol>
     <li><i> mainFunc:</i> *OLD: main script that includes everything - outdated </li><br>
@@ -93,3 +168,6 @@ load all of the functions using the <code>load.utils()</code> function.
     and then execute. Any feedback on this would be appreciated.</li>
     
 </ul>
+
+
+Any feedback and comments are greatly appreciated. Visit <a href="www.davidcruvolo.com" target="_blank">www.davidcruvolo.com</a> for my contact details. 
