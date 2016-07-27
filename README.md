@@ -105,7 +105,7 @@ Where....
     </li><br>
     <li><code>cnames</code> = Display column names. Default is TRUE</li><br><br>
     <li><code>rnames</code> = Display row names. Default is FALSE</li><br><br>
-<ul>
+</ul>
 
 
 ## Useful Converters
@@ -166,7 +166,6 @@ load all of the functions using the <code>load.utils()</code> function.
     flag for if the item is a directory. This only works when you want to get information on your current working directory.
     Ideally it should work for using specific paths (i.e., <code>.../.../this directory</code>, but it does not. Set the directory first, 
     and then execute. Any feedback on this would be appreciated.</li>
-    
 </ul>
 
 Any feedback and comments are greatly appreciated. 
