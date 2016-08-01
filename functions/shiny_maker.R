@@ -11,24 +11,13 @@ make_it_shiny <- function(directory_name = "myshinyapp", default_directory = "~/
         dir_path = paste0(dir_path,sample(1:99,size = 1))
     }
     
+    
     # mkdir main dir
+    cat("Making parent directory...\n"); Sys.sleep(1) # cat + break
     dir.create(dir_path)
     
-    # touch: ui, server, global
-    file.create(paste0(dir_path, "/","ui.R"),showWarnings = F)
-    file.create(paste0(dir_path, "/", "server.R"), showWarnings = F)
-    file.create(paste0(dir_path, "/", "global.R"), showWarnings = F)
-    
-    # touch: google-analytics.js
-    file.create(paste0(dir_path,"/","google-analytics.js"),showWarnings = F)
-    
-    # echo "default text" >> ...R file (ui, server, global)
-    make_my_text_shiny(paste0(dir_path, "/","ui.R"), file_type = "ui")
-    make_my_text_shiny(paste0(dir_path, "/","server.R"), file_type = "server")
-    make_my_text_shiny(paste0(dir_path, "/","global.R"), file_type = "global")
-    
-    
     # mkdir: external
+    cat("Making child folders...\n"); Sys.sleep(1) # cat + break
     dir.create(paste0(dir_path,"/","external"), showWarnings = F)
     
     # mkdir: data
@@ -40,34 +29,52 @@ make_it_shiny <- function(directory_name = "myshinyapp", default_directory = "~/
     # mkdir: www
     dir.create(paste0(dir_path,"/","www"), showWarnings = F)
     
+    
+    # touch: ui, server, global
+    cat("Creating primary shiny files...\n"); Sys.sleep(1) # cat + break
+    file.create(paste0(dir_path, "/","ui.R"),showWarnings = F)
+    file.create(paste0(dir_path, "/", "server.R"), showWarnings = F)
+    file.create(paste0(dir_path, "/", "global.R"), showWarnings = F)
+    
+    # echo "default text" >> ...R file (ui, server, global)
+    cat("Write default text to primary shiny files...\n"); Sys.sleep(1) # cat + break
+    make_my_text_shiny(paste0(dir_path, "/","ui.R"), file_type = "ui")
+    make_my_text_shiny(paste0(dir_path, "/","server.R"), file_type = "server")
+    make_my_text_shiny(paste0(dir_path, "/","global.R"), file_type = "global")
+    make_my_text_shiny(paste0(dir_path, "/external/", "main.R"), file_type = "main")
+
+    # touch: google-analytics.js
+    cat("Creating helper files...\n"); Sys.sleep(1) # cat + break
+    file.create(paste0(dir_path,"/","google-analytics.js"),showWarnings = F)
     # touch /www/style.css
     file.create(paste0(dir_path,"/","www","/", "style.css"), showWarnings = F)
     
     # end message
-    cat(paste0("New shiny project created! \nYou can find it here: ", dir_path,"\n\n"))
+    cat(paste0("New shiny project created! \nYou can find it here: ", dir_path,"\n"))
     
 }
 
-make_my_text_shiny <- function(file_path, file_type){
+make_my_text_shiny <- function(file_path, file_type, ui_layout = NULL){
     
     # TEXT----------------
     if(file_type == "ui"){
+        if(is.null(ui_layout)){
+            pageType = "navbarPage"
+        }
         # header
         text <- paste0("# ================", "\n",
                         "# Shiny: ui.R     ", "\n",
                         "# ================", "\n",
                         "\n",
                         "\n",
-                        "shinyUI(fluidPage(", "\n",
+                        "shinyUI(",pageType,"(", "\n",
                         "\t# MAIN PARAMETERS-----------------------------------", "\n",
                         "\n",
                         "\ttheme = shinytheme('journal'), # set theme", "\n",
-                        "\ttitle = 'myshinyapp', # set title", "\n",
-                        "\ttags$head(includeScript('google-analytics.js')), # include GA tracker", "\n",
-                        "\ttags$link(rel='stylesheet', type='text/css', href='style.css'), # css file","\n",  
+                        "\ttitle = 'myshinyapp', # set title",
                         "\n",
                         "\t# UI-------------------------------------------------", "\n",
-                        "\n",
+                        "\ttabPanel('Main', uiOutput('main')",
                         "\n",
                         "\n",
                         ")) # END UI")
@@ -79,7 +86,9 @@ make_my_text_shiny <- function(file_path, file_type){
                         "\n",
                        "shinyServer(function(input,output, session){","\n",
                        "\n",
-                       "\n",
+                       "# Source External","\n",
+                       "source('external/main.R', local = T)",
+                       "\n\n",
                        "}) # END SERVER")
     }
     else if(file_type == "global"){
@@ -98,6 +107,18 @@ make_my_text_shiny <- function(file_path, file_type){
                        "\n",
                        "\n",
                        "# LOAD DATA")
+    }
+    else if(file_type == "main"){
+        text <- paste0("# ================", "\n",
+                       "# MAIN UI PAGE     ", "\n",
+                       "# ================", "\n",
+                       "\n",
+                       "output$main <- renderUI({","\n",
+                       "\ttags$head(includeScript('google-analytics.js')), # include GA tracker", "\n",
+                       "\ttags$link(rel='stylesheet', type='text/css', href='style.css'), # css file","\n",
+                       "# ================", "\n",
+                       "\th1('My Shiny App')","\n\n",
+                       "})")
     }
     
     # OUTPUT
