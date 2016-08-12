@@ -4,85 +4,85 @@ shinyMaker <- function(directory_name = "myshinyapp"){
     ## DETECT OS
     os <- .Platform$OS.type
     if(os == "unix"){
-        default_directory = "~/Desktop/"
+        user = Sys.getenv("USER")
+        default_directory = paste0("/Users/",user,"/Desktop/")
     } else if(x == "windows"){
-        default_directory = "C:/Desktop/"
+        user = Sys.getenv("USERNAME")
+        default_directory = paste0("C:/Users/",user,"/Desktop/")
     }
     
-    #  set dir_path
+    ## SET DIR_PATH
     dir_path = paste0(default_directory, directory_name)
     
-    # check to see if dir_path exists
+    ## DOES DIR EXIST?
     if(dir.exists(dir_path)){
-        cat("\nQuick Note: Directory already exists. Appending the directory name with a random number.\n\n")
+        cat("Quick Note: Directory already exists. Appending the directory name with a random number.\n\n")
+        dir_path = paste0(dir_path,sample(1:1000,size = 1)); 
         Sys.sleep(1)
-        cat("shinyMaker()\n")
-        cat("==================================================\n");Sys.sleep(0.75)
-        Sys.sleep(1)
-        dir_path = paste0(dir_path,sample(1:1000,size = 1))
-    }else{
-        cat("shinyMaker()\n")
-        cat("==================================================\n");Sys.sleep(0.75)
     }
+    
+    ## BEGIN OUTPUTS
+    cat(paste0("Writing to:", dir_path,"\n"))
+    cat("==================================================\n")
+    Sys.sleep(1)
     
     
     # mkdir main dir
-    cat("1. Making parent directory...")
+    cat("1. Making parent directory...................")
     dir.create(dir_path)
-    Sys.sleep(1.5)
+    Sys.sleep(1)
     cat("Done!\n")
-    Sys.sleep(1.5)
+    Sys.sleep(1)
     
     # mkdir: external
-    cat("2. Making sub directories...")
+    cat("2. Making sub directories....................")
     dir.create(paste0(dir_path,"/","external"), showWarnings = F)
     dir.create(paste0(dir_path,"/","data"), showWarnings = F)
     dir.create(paste0(dir_path,"/","utilities"), showWarnings = F)
     dir.create(paste0(dir_path,"/","www"), showWarnings = F)
-    Sys.sleep(2)
+    Sys.sleep(1)
     cat("Done!\n")
-    Sys.sleep(1.5)
+    Sys.sleep(1)
     
     # touch: ui, server, global
-    cat("3. Creating primary shiny files...")
+    cat("3. Creating primary shiny files..............")
     file.create(paste0(dir_path, "/","ui.R"),showWarnings = F)
     file.create(paste0(dir_path, "/", "server.R"), showWarnings = F)
     file.create(paste0(dir_path, "/", "global.R"), showWarnings = F)
-    Sys.sleep(2)
+    Sys.sleep(1)
     cat("Done!\n")
-    Sys.sleep(1.5)
+    Sys.sleep(1)
     
     # echo: "default text" >> ...R file (ui, server, global, main)
-    cat("4. Write default text to primary shiny files...")
+    cat("4. Echo text to primary shiny files..........")
     make_my_text_shiny(paste0(dir_path, "/","ui.R"), file_type = "ui")
     make_my_text_shiny(paste0(dir_path, "/","server.R"), file_type = "server")
     make_my_text_shiny(paste0(dir_path, "/","global.R"), file_type = "global")
     make_my_text_shiny(paste0(dir_path, "/external/", "main.R"), file_type = "main")
-    Sys.sleep(2)
+    Sys.sleep(1)
     cat("Done!\n")
-    Sys.sleep(1.5)
+    Sys.sleep(1)
     
     # touch: google-analytics.js
-    cat("5. Creating blank google analytics file...")
+    cat("5. Creating blank google analytics file......")
     file.create(paste0(dir_path,"/utilities/","google-analytics.js"),showWarnings = F)
     Sys.sleep(1)
     cat("Done!\n")
-    Sys.sleep(1.5)
+    Sys.sleep(1)
     
     # touch: /www/style.css + echo "default text" >> style.css
     cat("6. Creating style.css and writing base css...")
     file.create(paste0(dir_path,"/","www","/", "style.css"), showWarnings = F)
     make_my_text_shiny(paste0(dir_path,"/www/", "style.css"), file_type = "css")
-    Sys.sleep(2)
+    Sys.sleep(1)
     cat("Done!\n")
-    Sys.sleep(1.5)
+    Sys.sleep(1)
     
     # CAT: Build Complete!
-    cat("6. Creating style.css and writing base css...Done!\n")
     cat("==================================================\n");Sys.sleep(0.75)
     cat("Status: COMPLETE\n")
-    Sys.sleep(1.5)
-    cat(paste0("You can find your shiny app here: ", dir_path,"\n"))
+    Sys.sleep(1)
+    #cat(paste0("You can find your shiny app here: ", dir_path,"\n"))
 }
 
 make_my_text_shiny <- function(file_path, file_type){
