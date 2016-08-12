@@ -78,7 +78,3 @@ dirInfo <- function(path = getwd(),sort = c("name","type", "created", "modified"
     ## PRINT DF------------------------------------
     return(df)
 }
-
-
-#delete1 = toString(unique(delete$Type[delete$Type != "----"]))
-
