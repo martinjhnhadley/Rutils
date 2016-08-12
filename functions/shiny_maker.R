@@ -6,7 +6,7 @@ shinyMaker <- function(directory_name = "myshinyapp"){
     if(os == "unix"){
         user = Sys.getenv("USER")
         default_directory = paste0("/Users/",user,"/Desktop/")
-    } else if(x == "windows"){
+    } else if(os == "windows"){
         user = Sys.getenv("USERNAME")
         default_directory = paste0("C:/Users/",user,"/Desktop/")
     }
