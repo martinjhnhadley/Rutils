@@ -16,9 +16,9 @@
 <ol>
     <li>dirInfo():</i> An expansion on dir(). This function provides a summary of getwd() i.e. total number of files, approx. size 
         of pwd, date created, date modified, and list of file types. A table summary is also provided with a boolean var for if the item
-        is a directory. Sorting options are available. <br>
-        <code> dirInfo(path= getwd(),sort = c("name","type", "created", "modified","isDir"))</code>.<br>
-        The R package <i>tools</i> is required for extracting file properties.</li>
+        is a directory. Sorting options are available. See below, <br>
+        <code> dirInfo(path= getwd(),sort = c("name","type", "created", "modified","isDir"))</code>.<br><br>
+        <i>Note:</i>The R package <i>tools</i> is required for extracting file properties.</li>
 </ol>
 
 #### Data Transformation

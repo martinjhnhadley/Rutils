@@ -4,24 +4,19 @@
 # ====== Script Details ====== #
 # Author = David Ruvolo
 # file = conversion_script.R
-# version = 0.0.1
 # Creation Date = Friday November 14 2014 13:12
-# Last Modified Date = Friday November 14 2014
-# ====== Update History ====== # 
-# v0.0.1:
-#   - Creation, tested out individual functions of temperature conversions
-#   - combined C -> F & F -> C fuctions to create a overall temp function
+# Last Modified Date = 12 August 2016
 # ============================ #
 temperature <- function(temp,temp_unit){
-      # From Celcius to Fahrenheit
-      if(temp_unit == "f"){
+        # From Fahrenheit to Celsius
+      if(temp_unit == "f" | temp_unit == "F" | temp_unit == "fahrenheit" | temp_unit == "Fahrenheit"){
             celsius_temp = (temp-32) * 5/9
             celsius_temp <- round(celsius_temp, digits = 2)
-            message("## ",temp, " degrees Fahrenheit = ", celsius_temp, " degrees Celsius.")
-      } else if(temp_unit == "c") {
-            # from Fahrenheit to Celsius
+            cat("##",temp, " degrees F = ", celsius_temp, "degrees Celsius.")
+      # From Celcius to Fahrenheit
+      } else if(temp_unit == "c" | temp_unit == "C" | temp_unit == "celsius" | temp_unit == "Celsius") {
             fahrenheit_temp = temp * (9/5) + 32
             fahrenheit_temp <- round(fahrenheit_temp,digits = 2)  
-            message ("## ",temp, " degrees Celsius = ", fahrenheit_temp," degrees Fahrenheit.") 
+            cat("##",temp, "degrees C =", fahrenheit_temp,"degrees Fahrenheit.") 
       }
 }
