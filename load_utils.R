@@ -11,8 +11,8 @@ load.utils <- function(directory = "~/Github/Rutils/functions/", sort = "name"){
     filelist <- dir(directory)
     
     # message 1
-    cat(paste0("I found: ", length(filelist), " packages. Loading...\n"))
-    Sys.sleep(1)
+    cat(paste0(length(filelist), " files found. Loading..."))
+    Sys.sleep(1.5)
         
     # load files
     for(i in 1:length(filelist)){
@@ -20,7 +20,9 @@ load.utils <- function(directory = "~/Github/Rutils/functions/", sort = "name"){
             source(paste0(directory, filelist[i]))
         }
     }
+    cat("Done!\n")
+    Sys.sleep(0.75)
     
     # message
-    cat("Your functions located in '~/Github/Rutils/functions/' were loaded successfully!")
+    cat(paste0("Your functions located in ",directory," were loaded successfully!"))
 }
