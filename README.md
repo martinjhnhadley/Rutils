@@ -3,18 +3,29 @@
 
 ## Functions
 
-#### Primary funtions
+##### Primary funtions
 
 <ol>
     <li><i>load_utils:</i> The primary function for loading all functions. Sets to default directory (github/Rutils)</li><br>
-    <li><i> clearR.R:</i> clear series - includes clear.console (wipes the console down) and clear.environment (removes all non-functions)</li><br>
+    <li><i>clearR.R:</i> clear series - includes clear.console (wipes the console down) and clear.environment (removes all non-functions)</li><br>
+</ol>
+
+
+#### System Functions
+
+<ol>
+    <li>dirInfo():</i> An expansion on dir(). This function provides a summary of getwd() i.e. total number of files, approx. size 
+        of pwd, date created, date modified, and list of file types. A table summary is also provided with a boolean var for if the item
+        is a directory. Sorting options are available. 
+        <code> dirInfo(path= getwd(),sort = c("name","type", "created", "modified","isDir"))</code>.
+
 </ol>
 
 #### Data Transformation
 
 <ol>
     <li><i> date_series:</i> useful functions relating to dates (i.e., data conversion, adding dates, difference between dates, etc.)</li><br>
-    <li><i> getR:</i> get series (includes get loaded functions, get file list/size of a directory, get a string from an object)</li><br>
+    <li><i> getR:</i> get series (includes get loaded functions, get a string from an object)</li><br>
     <li><i> toTable:</i> series of functions that send summary stats to csv file (handy with psych package)</li><br>
 </ol>
 
@@ -205,7 +216,7 @@ load all of the functions using the <code>load.utils()</code> function.
     &nbsp;&nbsp;<code>make_my_text_shiny(file_path = "/path/to/file", file_type = "ui")</code><br><br>
     <i>file_type</i> takes the following inputs: ui, server, global.
     </li>
-    <li>Function <code>get.dirInfo()</code> gets a list of all of the files in your working directory
+    <li>Function <code>dirInfo()</code> gets a list of all of the files in your working directory
     and presents summary information as a table. This includes file type, size, dates (created and modified), and
     flag for if the item is a directory. This only works when you want to get information on your current working directory.
     Ideally it should work for using specific paths (i.e., <code>.../.../this directory</code>, but it does not. Set the directory first, 
