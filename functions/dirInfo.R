@@ -40,7 +40,7 @@ dirInfo <- function(path = getwd(),sort = c("name","type", "created", "modified"
     cat("============================================================\n")
     cat(paste0("SUMMARY: \n",
                "\tFile(s): ",sum(df$Type !="----"), "\n",
-               "\t", "Total Size (MB): ", as.numeric(delete$Size[delete$Dir == F & delete$Size != "< 0.5 MB"]), "\n",
+              # "\t", "Total Size (MB): ",as.numeric(df$Size[df$Dir == F & df$Size !="< 0.5 MB"]),"\n",
                "\tSub Directories: ", sum(df$Dir == T), "\n",
                "\tDate Created Range: ",min(df$Created)," to ", max(df$Created), "\n",
                "\tDate Modified Range: ", min(df$LastModified)," to ", max(df$LastModified), "\n",
