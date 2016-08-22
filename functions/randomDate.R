@@ -7,8 +7,8 @@
 random.date<-function(year.floor, year.ceiling, reps){
     
     ## create blank matrix
-    out <- matrix(nrow = 12, ncol = 1)
-    colnames(out) <- c("Date")
+    dates <- matrix(nrow = 12, ncol = 1)
+    colnames(dates) <- c("Date")
     
     for(i in 1:reps){
         
@@ -55,11 +55,11 @@ random.date<-function(year.floor, year.ceiling, reps){
         ## ASSIGN TO MATRIX
         if( i == 1 ){
             
-            out[1] <- o.date
+            dates[1] <- o.date
             
         } else {
             
-            out[i] <- o.date
+            dates[i] <- o.date
             
         }
         
@@ -68,7 +68,7 @@ random.date<-function(year.floor, year.ceiling, reps){
     }
     
     ## RETURN MATRIX
-    data.frame(out)
+    data.frame(dates)
 }
 
 # random.date(year.floor = 2010, year.ceiling = 2016, reps = 12)

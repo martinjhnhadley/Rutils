@@ -187,4 +187,14 @@ custom.ggplot.themes.wl <- theme(panel.background = element_blank(),
                                  strip.background = element_rect(fill ="#F2F2F2",colour="grey")
                                  
 )
+
+ggTimeThemes <- theme(panel.background = element_blank(),
+                      panel.grid.major = element_line(color = "grey80"),
+                      panel.grid.minor = element_line(color = "grey92"),
+                      axis.text.x = element_text(colour="black", size = 11,vjust = 0.5), 
+                      axis.text.y = element_text(colour="black", size = 11, vjust = 0.5, hjust = 1),
+                      axis.ticks.x = element_blank(),
+                      axis.ticks.y = element_blank()
+)
+
 #===============================================================================
