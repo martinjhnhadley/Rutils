@@ -314,7 +314,9 @@ make_my_text_shiny <- function(file_path, file_type){
                        "\t\t\t\t\t\t<div class='p-spacers'/>","\n",
                        "\t\t\t\t\t\tVisit the my github repo: 
                        <a href='https://github.com/davidruvolo51/Rutils'>github/davidruvolo51/Rutils/</a>
-                       for more info.","\n",
+                       for more info.","\n", 
+                       "Or see the documentation: 
+                       <a href='http://www.davidcruvolo.com/external/shinyMaker_Documentation.pdf'>shinyMaker doc</a>",
                        "\t\t\t\t<div class='pageBottomBorder'/>","\n",
                        "\t\t\t\t</div>",'"',")","\n",
                        "\t\t\t)","\n",
