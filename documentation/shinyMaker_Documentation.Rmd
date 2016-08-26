@@ -1,0 +1,235 @@
+---
+output: 
+   pdf_document:
+      latex_engine: xelatex
+header-includes:
+# -----------------------------------
+# LaTex Preamble
+# specificy packages and options
+# primary aesthetics
+- \usepackage{geometry} 
+- \usepackage{pdflscape, lscape}
+- \usepackage{parskip}
+- \usepackage{tocloft}
+
+# Headers + Footers
+- \usepackage{fancyhdr}
+- \usepackage{lastpage}
+
+# fonts
+- \usepackage{fontspec}
+#- \setmainfont{Avenir Next Ultra Light}
+- \usepackage{anyfontsize}
+- \usepackage{sectsty}
+
+# references & TOC
+- \usepackage{hyperref}
+- \usepackage{tocloft}
+
+# tables
+- \usepackage{tikz}
+- \usepackage{array}
+- \usepackage{booktabs}
+- \usepackage{tabularx}
+- \usepackage{array}
+- \usepackage{rotating}
+- \usepackage{multirow}
+
+# graphics
+- \usepackage{graphicx}
+- \usepackage{caption}
+
+# colors and themes
+- \usepackage{colortbl,xcolor, color}
+- \definecolor{Darkgreen}{rgb}{0,0.4,0}
+- \definecolor{LightBlue}{RGB}{222,235,247}
+- \definecolor{LightGreen}{RGB}{229,245,224}
+- \definecolor{LightOrange}{RGB}{254,230,206}
+
+# -----------------------------------
+# finish YAML
+geometry: margin=0.75in
+fontsize: 12pt
+# do not add title, custom one below
+---
+
+<!--- ESTABLISH MAIN DOCUMENT PARAMETERS --->
+``` {r echo = FALSE, label = "Title"}
+# create custom header
+title <- "shinyMaker Documentation"
+title <- toupper(title)
+date <- format(Sys.Date(),format = "%A %B %d, %Y") # format date
+footdate <- format(Sys.Date(),format  = "%D")
+
+# define latex controls
+body.text.fs <- 12 # main body text size
+document.vspace.default <- paste0(0.25,"cm") # vspace
+document.vspace.title <- paste0(0.15,"cm") # vspace for space between title and document body
+section.mainheaders.fs <- 16 # section headers size
+section.subheaders.fs <- 14 # subsection header
+title.date.fs <- 14 # main title date size
+title.name.fs <- 21 # main title name size
+
+# \rule{\textwidth}{0.25pt} # to add a horizontal line across document within margins
+````
+
+<!--- Define hyperlink aesthetics --->
+\hypersetup{%
+    pdfborder = {0 0 0},
+    colorlinks,
+    citecolor=red,
+    filecolor=blue,
+    linkcolor=black,
+    urlcolor=Darkgreen
+}
+
+<!--- Define Headers and Footers --->
+\fancypagestyle{plain}{%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyhf{}%
+  \fancyfoot[L]{\footnotesize `r footdate`}%
+  \fancyfoot[C]{\footnotesize shinyMaker}%
+  \fancyfoot[R]{\footnotesize Page \thepage\, of\, \pageref*{LastPage}}%
+}
+
+<!--- First page has no header or footers --->
+\pagestyle{plain}
+
+<!--- Create custom section header --->
+\sectionfont{\fontsize{`r section.mainheaders.fs`}{10}\selectfont\sectabx}
+
+\newcommand{\sectabx}[1]{%
+\noindent\begin{tabularx}{\textwidth}{@{} l X @{} }
+    \multirow{2}{*}{#1} & \\
+    \cline{2-2}
+    & \\
+\end{tabularx}}
+
+<!--- Make Header --->
+\begin{center}
+   \fontsize{`r title.name.fs`}{10}\selectfont `r title` \break
+   \break
+   \fontsize{`r title.date.fs`}{10}\selectfont `r date` \break
+\end{center}
+
+This document was written by \href{http://www.davidcruvolo.com}{David Ruvolo}.
+
+\section{Introduction}
+
+The shiny_maker.R script is a standard builder for creating Shiny apps.
+Generating and setting up initial shiny files (i.e., server, ui, global, css, external, assets,
+etc.) can be tedious and take a while to setup. In the first instance, this script
+will generate navbarPages with default starter text. 
+
+This function generates a shiny navbarPage and all necessary files. The app structure looks like this:
+
+```{r eval = F, echo = T}
+## directory structure
+ShinyApp/
+        --- global.R
+        --- ui.R
+        --- server.R
+        --- data/
+        --- external/
+                    | --- main.R
+        --- utilities/
+                    | --- google-analytics.js
+        --- www/
+                    | --- style.css
+```
+
+
+\section{Usage}
+
+The shiny_maker.R file has 3 functions built in.
+
+###1. <code>%+=%<code>
+
+The function <code>%+=%<code> is increments the left argument by a value on the right. This was 
+implemented from \href{https://stackoverflow.com/questions/5738831/r-plus-equals-and-plus-plus-equivalent-from-c-c-java-etc}{this stackoverflow post}. 
+
+```{r eval=T, echo = T}
+`%+=%` = function(e1,e2) eval.parent(substitute(e1 <- e1 + e2))
+x = 10
+x %+=% 10
+x
+```
+
+###2. navbarMaker()
+
+The <code>navbarMaker()</code> is the first shiny app maker in the shinyMaker series. 
+
+#### Parameters
+
+The function <code>navbarMaker()</code> takes the follow parameters:
+
+\begin{itemize}
+    \item directory{\_}name: The name of the shiny app directory.
+    \item dir{\_}path: The path for where you want the app stored. Default is desktop.
+\end{itemize}
+
+#### Examples
+
+```{r eval = F, echo = T}
+
+# source file
+source("shiny_maker.R")
+
+# basic usage
+navbarMaker()
+
+# specifying app name
+navbarMaker(directory_name = "Project Analysis Tool")
+
+# setting directory path
+navbarMaker(dir_path = ".../Documents/")
+
+# both options
+navbarMaker(directory_name = "Visualization Tool", dir_path = ".../Documents")
+
+```
+
+###3. make_my_text_shiny()
+
+The <code>make_my_text_shiny()</code> writes default text to the shiny app files.
+Ships with navbarMaker() and reads the dir_path
+
+```{r eval = F, echo = T}
+make_my_text_shiny(file_path, file_type)
+```
+#### Parameters
+
+The function <code>make_my_text_shiny()</code> takes the follow parameters:
+
+\begin{itemize}
+    \item file{\_}path: path of the file.
+    \item file{\_}type: name the file type you are writing text to. Options include: ui, server, global, main, and css.
+\end{itemize}
+
+#### Examples
+
+```{r echo = T, eval = F}
+
+# source file
+source("shiny_maker.R")
+
+# write ui
+make_my_text_shiny(file_path = "/path/to/dir/ui.R", file_type = "ui")
+
+# write server
+make_my_text_shiny(file_path = "/path/to/dir/ui.R", file_type = "server")
+
+# write global
+make_my_text_shiny(file_path = "/path/to/dir/ui.R", file_type = "global")
+
+# write main tab Panel
+make_my_text_shiny(file_path = "/path/to/dir/ui.R", file_type = "main")
+
+# write css
+make_my_text_shiny(file_path = "/path/to/dir/ui.R", file_type = "css")
+
+```
+
+
+
+
