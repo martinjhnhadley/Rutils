@@ -53,3 +53,8 @@ get.string = function(mystring, initial.character, final.character)
     
     return(snippet)
 }
+
+# https://stackoverflow.com/questions/25477920/get-characters-before-first-space
+beforeSpace <- function(inWords) {
+    vapply(inWords, function(L) strsplit(L, "[[:space:]]")[[1]][1], FUN.VALUE = 'character')
+}
