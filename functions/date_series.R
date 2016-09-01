@@ -13,6 +13,9 @@ DAYS <- c("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"
 dates.add.months <- function(date,n){
     # add n to a date and keep date format
     # seq input date and increase month position
+    # handle date
+    date <- as.Date(date)
+    # add 
     seq(date, by = paste (n, "months"), length = 2)[2]
 }
 #---------------------------
@@ -43,6 +46,8 @@ dates.print.MonthsYears <- function(start_date, end_date){
 num.weekdays <- function(start_date,end_date)
 {
     # FORMAT: NWEEKDAYS("11/15/2015","11/24/2015")
+    start_date <- as.Date(start_date)
+    end_date <- as.Date(end_date)
     
     dates <- as.numeric((as.Date(start_date,"%m/%d/%y")):(as.Date(end_date,"%m/%d/%y")))
     
