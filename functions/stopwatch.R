@@ -64,3 +64,21 @@ stopwatch <- function(){
         Sys.sleep(1)
     }
 }
+
+
+
+timer <- function(interval = 10){
+    ## https://stackoverflow.com/questions/4853596/how-to-best-create-a-timer-function-in-r
+    ## =============================
+    ## Print greeting
+    cat("Welcome to timeR!\n\n")
+    total = readline(prompt = "How long would you like to set in seconds?")
+    
+    interval = 1    
+    t0 <- Sys.time()
+
+    seconds <- round(as.double( difftime(Sys.time(), t0, u = 'secs')))
+    if(seconds > total)
+    return(-1) else
+    return(trunc( 1 + (seconds / interval ) ) %% 2)
+}
