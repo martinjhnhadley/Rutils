@@ -2,7 +2,7 @@
 # ====================
 # loadR
 # ====================
-load.utils <- function(directory = "~/Github/Rutils/functions/", sort = "name"){
+load.utils <- function(directory = "~/Github/mygithub/Rutils/functions/", sort = "name"){
     
     # load package
     require(tools, quietly = T)
