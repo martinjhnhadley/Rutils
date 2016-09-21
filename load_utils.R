@@ -1,28 +1,50 @@
-## load functions
-# ====================
-# loadR
-# ====================
-load.utils <- function(directory = "~/Github/mygithub/Rutils/functions/", sort = "name"){
+#' =============================================================================
+#' File: load_utils.R
+#' Created: 11 July 2016
+#' Modified: 21 September 2016
+#' Purpose: Quick and dirty file loader for functions
+#' Use: source this file, and then run load.utils
+#' =============================================================================
+#' FUNCTION
+load.utils <- function(directory = NULL){
     
-    # load package
-    require(tools, quietly = T)
+    #' Read directory 
+    #' set default directory to Rutils
+    if(is.null(directory)){
+        directory <- "~/Github/Rutils/functions/"
+    }
     
-    # create file list
+    #' load package or install if not found
+    if("tools" %in% rownames(installed.packages()) == FALSE){ # search package names
+    
+        install.packages("tools",dependencies = T) # otherwise install w/dependencies
+    
+    } else {
+    
+        require(tools, quietly = T) # else load quietly 
+        
+    }
+    
+    #' create file list in directory
     filelist <- dir(directory)
     
-    # message 1
-    cat(paste0(length(filelist), " files found. Loading..."))
-    Sys.sleep(1.5)
+    #' message 1
+    cat(paste0("Loading from: ", directory,"\n"))
+    cat("=======================================================================\n")
+    cat(paste0("Files found: ", length(filelist), "\n"))
         
-    # load files
+    #' load files and message user
     for(i in 1:length(filelist)){
         if(file_ext(filelist[i]) == "R"){
+            cat(paste0(i,". ", "Load: ", filelist[i]))
             source(paste0(directory, filelist[i]))
+            Sys.sleep(0.75)
+            cat(".....................Complete!\n")
+            Sys.sleep(1)
         }
     }
-    cat("Done!\n")
-    Sys.sleep(0.75)
     
-    # message
-    cat(paste0("Your functions located in ",directory," were loaded successfully!"))
+    #' complete display
+    cat("=======================================================================\n")
+    cat("Status: Done!\n")
 }
