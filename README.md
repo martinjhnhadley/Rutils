@@ -222,7 +222,3 @@ load all of the functions using the <code>load.utils()</code> function.
     Ideally it should work for using specific paths (i.e., <code>.../.../this directory</code>, but it does not. Set the directory first, 
     and then execute. Any feedback on this would be appreciated.</li>
 </ul>
-
-Any feedback and comments are greatly appreciated. 
-
-Visit <a href="www.davidcruvolo.com" target="_blank">www.davidcruvolo.com</a> for my contact details.<br><br>
