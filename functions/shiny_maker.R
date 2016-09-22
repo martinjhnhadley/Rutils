@@ -1,3 +1,13 @@
+#'=============================================================================
+#' File: shiny_maker.R
+#' Author: David Ruvolo
+#' Created: 22 September 2016
+#' Modified: 22 September 2016
+#' Purpose: Quick and dirty function boiler plate
+#' Use: source this file, and then run generateFunction
+#' =============================================================================
+#' FUNCTION 
+#' 
 #' Shiny Maker
 #'
 #' \code{shinyMaker} was built to create a standard setup for shiny apps. Generating
