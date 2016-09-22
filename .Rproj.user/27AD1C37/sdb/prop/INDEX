@@ -36,6 +36,7 @@
 ~%2FGithub%2FRutils%2Fexamples%2FR_unix.R="ECE636CC"
 ~%2FGithub%2FRutils%2Ffunctions%2FclearR.R="3E1EA620"
 ~%2FGithub%2FRutils%2Ffunctions%2Fconversion_script.R="C6AB1BCE"
+~%2FGithub%2FRutils%2Ffunctions%2Fdate_series.R="6C12A3B0"
 ~%2FGithub%2FRutils%2Ffunctions%2FdirInfo.R="920021EA"
 ~%2FGithub%2FRutils%2Ffunctions%2FgenerateFunction.R="1F829D95"
 ~%2FGithub%2FRutils%2Ffunctions%2FgetR.R="A4811085"
@@ -49,3 +50,4 @@
 ~%2FGithub%2FRutils%2Fload_utils.R="242954D8"
 ~%2FGithub%2FRutils%2Fshiny_maker.R="99071A69"
 ~%2Ftemp%2Fdoggo.R="A98D9F42"
+~%2Ftemp%2FdoggoPup.R="86BD4AFD"

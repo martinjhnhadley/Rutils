@@ -1,78 +1,98 @@
-## A Variety of data/time functions
-#===============================================================================
-# CALENDAR SERIES
-#===============================================================================
-# Create MONTHS of the year list
+#' =========================================================
+#' File: date_series.R
+#' Author: David Ruvolo
+#' Created: 15 November 2014
+#' Modified: 22 September 2016
+#' Purpose: make date functions for data recode + viz
+#' Use: source file and then call functions
+#' Notes: NA
+#' =========================================================
+#' BEGIN FUNCTIONS
+
+#' MONTHS[i]
+#' Make list of MONTHS out of the year
+#' use:
+#'      > MONTHS[1]
+#'      > [1] "January"
 MONTHS <- c("January","Febraury","March","April","May","June",
             "July","August","September","October","November","December")
-#---------------------------
-# Create DAYS of the week list
+
+#' DAYS[i]
+#' Make list of DAYS of the week
+#' use:
+#'      > DAYS[3]
+#'      > [3] "Tuesday"
 DAYS <- c("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
-#---------------------------
-# increase date by n months
+
+#' dates.add.months()
+#' Increase month by 'n', while keeping date format
 dates.add.months <- function(date,n){
-    # add n to a date and keep date format
-    # seq input date and increase month position
-    # handle date
+    
+    #' handle date
     date <- as.Date(date)
-    # add 
+    
+    #' add 
     seq(date, by = paste (n, "months"), length = 2)[2]
+    
 }
-#---------------------------
-# print a list based on the the number of months between two dates
-# return as list formatted as "Month Year" (i.e., Febraury 2016) OR "%M %Y"
+
+#' dates.print.MonthsYears()
+#' print a list based on the the number of months between two dates
+#' return as list formatted as "Month Year" (i.e., Febraury 2016) OR "%M %Y"
 dates.print.MonthsYears <- function(start_date, end_date){
     
-    # calls num.months() function written in the next section
+    #' calls num.months() function written in the next section
     reps = num.months(end_date,start_date)
     
-    # loop through the n months and print month/year format
+    #' loop through the n months and print month/year format
     for(i in 1:reps){
-        # for first case only, must initialize list
+        
+        #' for first case only, must initialize list
         if(i ==1 ){
             months_order = format(dates.add.months(start_date,0),"%B %Y")
         }
-        # loop through the remaining cases until the end
+        
+        #' loop through the remaining cases until the end
         months_order = c(months_order,format(dates.add.months(start_date,i),"%B %Y"))
     }
-    # return list
+    
+    #' return list
     return(months_order)
 }
-#===============================================================================
-# NUM series
-#===============================================================================
-# Calculate the number of week days between two dates
 
+#' num.weekdays()
+#' calculate the number of week days between two dates
 num.weekdays <- function(start_date,end_date)
 {
-    # FORMAT: NWEEKDAYS("11/15/2015","11/24/2015")
+    #' FORMAT: NWEEKDAYS("11/15/2015","11/24/2015")
+    #' handle start and end dates
     start_date <- as.Date(start_date)
     end_date <- as.Date(end_date)
     
+    #' calculate 
     dates <- as.numeric((as.Date(start_date,"%m/%d/%y")):(as.Date(end_date,"%m/%d/%y")))
-    
     dates <- dates[- c(1,length(dates))]
     
+    #' print
     return(sum(!dates%%7%in%c(0,6)))
     
 }
-# Calculate the number of dates between two dates
+
+#' num.months()
+#' Calculate the number of dates between two dates
 num.months <- function(end_date, start_date){
     
+    #' handle start + end dates
+    sd <- as.POSIXlt(start_date)
     ed <- as.POSIXlt(end_date)
     
-    sd <- as.POSIXlt(start_date)
-    
+    #' calcuate
     12 * (ed$year - sd$year) + (ed$mon - sd$mon)
+    
 }
 
-#===============================================================================
-# Title: Month <-> Month Name Converter
-# Created: July 23, 2015
-# Author: David Ruvolo 
-# 
-# Instructions: assign function to variable than enter type
-#===============================================================================
+#' month.converter()
+#' converts numeric value into month, categorical into numeric
 month.converter <- function(ui.month){
     if(class(ui.month) == 'numeric') {
         # -----------------------
