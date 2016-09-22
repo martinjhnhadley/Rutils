@@ -1,15 +1,24 @@
-## Clear Series
-#===============================================================================
-# clear console screen    
-#===============================================================================
+#' =============================================================================
+#' File: clearR.R
+#' Author: David Ruvolo
+#' Created: 15 July 2016
+#' Modified: 22 September 2016
+#' Purpose: Basic clearing functions
+#' Use: source this file, and then run: clear.console() or clear.environment()
+#' Notes: NA
+#' =============================================================================
+#' FUNCTIONS
+
+#' clear console screen    
+
 clear.console <- function(){
     
     cat("\014") # command to clear screen wrapped in a function
     
 }
-#===============================================================================
-# clear ls() minus functions
-#===============================================================================
+
+#' clear global env minus functions
+
 clear.environment <- function(){
     ENV <- globalenv()
     ll <- ls(envir = ENV)
