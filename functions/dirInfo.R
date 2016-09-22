@@ -1,6 +1,13 @@
-#===============================================================================
-# FUNCTION: Get file/directory size in MBs - default is dir()
-#===============================================================================
+#' =========================================================
+#' File: dirInfo.R
+#' Author: David Ruvolo
+#' Created: 12 August 2016
+#' Modified: 22 September 2016
+#' Purpose: Get file/directory size in MBs - default is dir()
+#' Use: source file and then call functions
+#' Notes: NA
+#' =========================================================
+#' BEGIN FUNCTIONS
 dirInfo <- function(dir_path = NULL,sort = c("name","type", "created", "modified","isDir")){
     
     # SET 'DIR'-------------------------------------------------
@@ -15,14 +22,20 @@ dirInfo <- function(dir_path = NULL,sort = c("name","type", "created", "modified
     
     # BUILD MAIN DIRECTORIES DF-------------------------------
     for (i in 1:length(dir)){
-        if(i == 1){ #first iteration: initiate df
+        
+        #' first iteration: initiate df
+        if(i == 1){ 
+            
             name <- as.character(dir[i])
             type <- file_ext(dir[i])
             size <- as.numeric(round(file.size(dir[i]) / 1048576, 2))
             create <- format(as.Date(file.info(dir[i])$ctime),"%Y-%m-%d")
             mod <- format(as.Date(file.info(dir[i])$mtime),"%Y-%m-%d")
             fDir <- file.info(dir[1])$isdir
-        } else{ # all subsequent loops append df
+        } 
+        
+        # all subsequent loops append df
+        else{
             name <- rbind(name, dir[i])
             type <- rbind(type, file_ext(dir[i]))
             size <- rbind(size, as.numeric(round(file.size(dir[i])/1048576, 2)))
