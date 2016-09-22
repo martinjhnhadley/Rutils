@@ -1,5 +1,6 @@
 #' =============================================================================
 #' File: load_utils.R
+#' Author: David Ruvolo
 #' Created: 11 July 2016
 #' Modified: 21 September 2016
 #' Purpose: Quick and dirty file loader for functions
