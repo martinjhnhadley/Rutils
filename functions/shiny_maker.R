@@ -160,9 +160,9 @@ navbarMaker <- function(directory_name = "Shiny App", dir_path = NULL){
     # echo: "default text" >> ...R file (ui, server, global, main)--------------
     cat("4. Echo text to primary shiny files..........")
     make_my_text_shiny(paste0(dir_path, "/","ui.R"), file_type = "ui")
-    make_my_text_shiny(paste0(dir_path, "/","server.R"), file_type = "server")
+    make_my_text_shiny(paste0(dir_path, "/","server.R"), file_type = "server", title = directory_name)
     make_my_text_shiny(paste0(dir_path, "/","global.R"), file_type = "global")
-    make_my_text_shiny(paste0(dir_path, "/external/", "main.R"), file_type = "main")
+    make_my_text_shiny(paste0(dir_path, "/external/", "main.R"), file_type = "main", title = directory_name)
     
     ## logic
     ifelse(length(readLines(con = paste0(dir_path, "/", "ui.R"), warn = F)) > 0, tally %+=% 1, "")
@@ -245,7 +245,7 @@ navbarMaker <- function(directory_name = "Shiny App", dir_path = NULL){
 # MAKE_MY_TEXT_SHINY------------------------------------------------------------
 # function that echos starting code to shiny files (ui, server, global, main tab 
 # panel, and custom css)
-make_my_text_shiny <- function(file_path, file_type){
+make_my_text_shiny <- function(file_path, file_type, title){
     
     # TEXT----------------
         # header
@@ -253,17 +253,11 @@ make_my_text_shiny <- function(file_path, file_type){
         text <- paste0("# ================", "\n",
                         "# Shiny: ui.R     ", "\n",
                         "# ================", "\n",
-                        "shinyUI(fluidPage(", "\n",
-                        "\t## MAIN PARAMETERS-----------------------------------", "\n",
-                        "\ttheme = shinytheme('flatly'), # set theme", "\n",
-                        "\ttitle = 'myshinyapp', # set title","\n",
-                        "\t## LINK EXTERNAL-------------------------------------","\n",
-                        '\ttags$link(rel="stylesheet", type="text/css",href = "style.css"), # css',"\n",
-                       '\t#tags$head(includeScript("google-analytics.js")),',"\n",
+                        "shinyUI(",
                         "\t## UI-------------------------------------------------", "\n",
                         "\tuiOutput('page')",
                         "\n",
-                        ")) # END UI")
+                        ") # END UI")
     }
     else if(file_type == "server"){
         text <- paste0("# ================", "\n",
@@ -278,9 +272,15 @@ make_my_text_shiny <- function(file_path, file_type){
                        "\t## BUILD UI PAGE","\n",
                        "\toutput$page <- renderUI({", "\n",
                        "\t\tnavbarPage(","\n",
-                       "\t\t\t","title = 'My Shiny App',","\n",
+                       "\t\t\ttheme = shinytheme('flatly'), # set theme", "\n",
+                       "\t\t\t","title =","'", title,"',","\n",
                        "\t\t\t# LOAD UI ELEMENTS [insert additional panels below]","\n",
-                       '\t\t\ttabPanel("Main", uiOutput("main"), icon = icon("home"))',"\n",
+                       '\t\t\ttabPanel("Main", uiOutput("main"), icon = icon("home")),',"\n",
+                       '\t\t\t# add in other panels here',"\n",
+                       "\n",
+                       "\t\t\t## LINK EXTERNAL-------------------------------------","\n",
+                       '\t\t\ttags$head(tags$link(rel="stylesheet", type="text/css",href = "style.css")), # css',"\n",
+                       '\t\t\ttags$head(tags$link(includeScript("utilities/google-analytics.js")))',"\n",
                        "\t\t)","\n",
                        "\t})","\n",
                        "}) # END SERVER")
@@ -313,7 +313,7 @@ make_my_text_shiny <- function(file_path, file_type){
                        '\t\t## MAIN TITLE-------------',"\n",
                        "\t\tfluidRow(","\n",
                        "\t\t\tcolumn(6, offset = 3,","\n",
-                       "\t\t\t\tHTML(",'"',"<div class=","'pageHeader'",">My Shiny App</div>",'"))',"\n",
+                       "\t\t\t\tHTML(",'"',"<div class=","'pageHeader'",">",title,"</div>",'"))',"\n",
                        "\t\t),","\n",
                        "\t\t## INTRO TEXT--------------","\n",
                        "\t\tfluidRow(","\n",
