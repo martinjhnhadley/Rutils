@@ -279,7 +279,7 @@ make_my_text_shiny <- function(file_path, file_type, title){
                        '\t\t\t# add in other panels here',"\n",
                        "\n",
                        "\t\t\t## LINK EXTERNAL-------------------------------------","\n",
-                       '\t\t\ttags$head(tags$link(rel="stylesheet", type="text/css",href = "style.css")), # css',"\n",
+                       '\t\t\ttags$link(rel="stylesheet", type="text/css",href = "style.css"), # css',"\n",
                        '\t\t\ttags$head(tags$link(includeScript("utilities/google-analytics.js")))',"\n",
                        "\t\t)","\n",
                        "\t})","\n",
