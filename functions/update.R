@@ -18,35 +18,7 @@
 # install, move, update.package, quit R. 
 # Follow the on screen instructions and you may have to hit next, okay, etc.
 # Program will exit once updates are installed and packages are moved back to the library().  
-# ##############################################################################
-# Title: package_checker()
-# Purpose: checker to see if package is installed. If not, install. If true, load.
-# Date Created: Saturday July 30, 2016
 
-library_check <- function(package) 
-{   
-    # deal with input var
-    #package_check <- as.character(package)
-    
-    # set if null
-    ifelse(is.na(package), warning("ERROR: no input given", immediate. = T),"")
-    
-    # conditional for package
-    if(package %in% rownames(installed.packages()) == FALSE){ # search package names
-        # for not found, install anyways
-        cat("Installing package....")
-        # install
-        install.packages(packages,dependencies = T) # otherwise install w/dependencies
-        
-    } else {
-        # print load message
-        cat("Loading package....")
-        # load 
-        library(package, character.only = T) # else load quietly 
-        # exit message
-        cat("Done!")
-    }
-}
 
 #progBar <- function(x = sort(runif(20)), ...)
 #{
